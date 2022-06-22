@@ -1,14 +1,15 @@
-import { Track } from "../types/Music"
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import Song from "./Song";
 
+import { useState, useEffect } from "react";
+import { ListGroup, Container, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import {Track } from "../types/Track";
+import Song from "./Song";
 
 
 
 const Album = () => {
    const params = useParams();
-    const [musicTrack, setMusicTracks] = useState<Track[]>([]);
+    const [musicTrack, setMusicTracks] = useState<Track | null>(null);
     
     const fetchData = async () => {
         try {
@@ -16,7 +17,8 @@ const Album = () => {
             if (response.ok) {
                 const data = await response.json();
                 console.log(data);
-                setMusicTracks(data);
+                console.log(data.artist);
+                setMusicTracks(data.artist);
             }
                
         } catch (error) {
@@ -32,13 +34,19 @@ const Album = () => {
 
     
     return (
-        <div className="album">
-            <div className="album__tracks">
-                {musicTrack.map(track => (
-                    <Song key={track.id} track={track} />
-                ))}
-            </div>
-        </div>
+        <Container>
+            <Row className="text-center">
+                <h1>{musicTrack?.name}</h1>
+            </Row>
+            <Row className="text-center">
+      <ListGroup>
+        {musicTrack && (
+            <Song track={musicTrack} />
+        )}
+      </ListGroup>
+    </Row>
+       
+      </Container>
 
        
     )

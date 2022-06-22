@@ -13,7 +13,7 @@ const MusicResult = ({song}: MusicResultProps) => {
   <Card.Img variant="top" src={song.album.cover_medium} />
   <Card.Body>
     <Card.Title>{song.title}</Card.Title>
-    <Link to={`/music/${song.id}`}>
+    <Link to={`/${song.id}`}>
     <Card.Text>{song.artist.name}</Card.Text>
     </Link>
    

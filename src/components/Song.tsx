@@ -1,16 +1,19 @@
-import { Track } from "../types/Music"
+import { Track } from "../types/Track";
+import {Card, Col} from "react-bootstrap";
 interface TrackProps {
     track: Track;
 }
-const Song = ({ track }: TrackProps) => (
-    <div className="py-3 trackHover">
-      <span className="card-title trackHover px-3" style={{ color: "white" }}>
-        {track.title}
-      </span>
-      <small className="duration" style={{ color: "white" }}>
-        {track.duration}
-      </small>
-    </div>
+const Song = ({ track }: TrackProps) => 
+(
+   <Col >
+    <Card>
+        <Card.Img variant="top" src={track.picture_medium} />
+        <Card.Body>
+            <Card.Title>{track.name}</Card.Title>
+            <Card.Text>{track.id}</Card.Text>
+        </Card.Body>
+    </Card>
+    </Col>
   );
   
   export default Song;
